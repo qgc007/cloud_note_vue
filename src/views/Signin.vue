@@ -84,6 +84,7 @@ import ArgonSwitch from "@/components/ArgonSwitch.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import axios from 'axios'
+import  global from '../global';
 export default {
   name: "signin",
   components: {
@@ -95,7 +96,7 @@ export default {
   methods:{
     loginTest(){
       alert("tesst");
-      axios.post("/api/login/sign_in",{"umail":"qinguoce@126.com","upwd":"123456"}).then(response =>{
+      axios.post(global.SignURL,{"umail":"qinguoce@126.com","upwd":"123456"}).then(response =>{
         alert(response.data.result)
       }).catch(err=>{
         console.log("err" + err);
