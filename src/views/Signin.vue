@@ -95,8 +95,8 @@ export default {
   methods:{
     loginTest(){
       alert("tesst");
-      axios.post("/api/test").then(response =>{
-        alert(response.data)
+      axios.post("/api/login/sign_in",{"umail":"qinguoce@126.com","upwd":"123456"}).then(response =>{
+        alert(response.data.result)
       }).catch(err=>{
         console.log("err" + err);
       })
