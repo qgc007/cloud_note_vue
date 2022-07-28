@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "argon-switch",
+  name: "note-switch",
   props: {
     name: String,
     id: String,

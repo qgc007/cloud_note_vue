@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "argon-avatar",
+  name: "note-avatar",
   props: {
     img: String,
     alt: String,

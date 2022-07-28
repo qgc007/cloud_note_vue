@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "argon-socialButton",
+  name: "note-socialButton",
   props: {
     icon: String,
     iconOnly: String,

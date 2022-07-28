@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "argon-pagination-item",
+  name: "note-pagination-item",
   props: {
     label: String,
     active: {

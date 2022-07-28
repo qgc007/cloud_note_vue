@@ -13,6 +13,7 @@
         :value="value"
         :placeholder="placeholder"
         :isRequired="isRequired"
+        @input="onInput"
       />
       <span v-if="iconDir === 'right'" class="input-group-text">
         <i :class="getIcon(icon)"></i>
@@ -23,7 +24,7 @@
 
 <script>
 export default {
-  name: "argon-input",
+  name: "note-input",
   props: {
     size: {
       type: String,
@@ -43,6 +44,9 @@ export default {
     isRequired: Boolean,
   },
   methods: {
+    onInput(e){
+      this.$emit('update:value', e.target.value);
+    },
     getClasses: (size, valid) => {
       let sizeValue, isValidValue;
 

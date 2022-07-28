@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "argon-progress",
+  name: "note-progress",
   props: {
     color: {
       type: String,

@@ -136,7 +136,7 @@ vue-argon-dashboard
     │   │   ├── Tables.vue
     │   │   └── VirtualReality.vue
     │   ├── App.vue
-    │   ├── argon-dashboard.js
+    │   ├── note-dashboard.js
     │   └── main.js
     ├── .browserslistrc
     ├── .eslintrc.js

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "argon-badge",
+  name: "note-badge",
   props: {
     size: {
       type: String,

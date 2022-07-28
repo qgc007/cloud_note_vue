@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "argon-pagination",
+  name: "note-pagination",
   props: {
     color: String,
     size: String,

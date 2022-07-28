@@ -1,7 +1,7 @@
 <template>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" :name="name" :id="id" :checked="checked" />
-    <label :for="id" class="custom-control-label">
+    <input class="form-check-input" type="radio" :name="name" :id="id" :checked="checked" />
+    <label class="custom-control-label" :for="id">
       <slot />
     </label>
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "argon-checkbox",
+  name: "note-radio",
   props: {
     name: String,
     id: String,

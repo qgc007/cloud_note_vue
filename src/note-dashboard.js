@@ -1,5 +1,5 @@
 import "./assets/js/nav-pills.js";
-import "./assets/scss/argon-dashboard.scss";
+import "./assets/scss/note-dashboard.scss";
 
 export default {
   install() {},

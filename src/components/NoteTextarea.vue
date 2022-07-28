@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "argon-textarea",
+  name: "note-textarea",
   props: {
     id: String,
     placeholder: String,

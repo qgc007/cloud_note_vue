@@ -2,11 +2,11 @@
   <div class="container top-0 position-sticky z-index-sticky">
     <div class="row">
       <div class="col-12">
-        <navbar
-          isBlur="blur  border-radius-lg my-3 py-2 start-0 end-0 mx-4 shadow"
-          v-bind:darkMode="true"
-          isBtn="bg-gradient-success"
-        />
+<!--        <navbar-->
+<!--          isBlur="blur  border-radius-lg my-3 py-2 start-0 end-0 mx-4 shadow"-->
+<!--          v-bind:darkMode="true"-->
+<!--          isBtn="bg-gradient-success"-->
+<!--        />-->
       </div>
     </div>
   </div>
@@ -24,21 +24,21 @@
                 <div class="card-body">
                   <form role="form">
                     <div class="mb-3">
-                      <argon-input type="email" placeholder="Email" name="email" size="lg" />
+                      <note-input type="email" placeholder="Email" name="email" size="lg" v-model:value="email"/>
                     </div>
                     <div class="mb-3">
-                      <argon-input type="password" placeholder="Password" name="password" size="lg" />
+                      <note-input type="password" placeholder="Password" name="password" size="lg"  v-model:value="pwd"/>
                     </div>
-                    <argon-switch id="rememberMe">Remember me</argon-switch>
+                    <note-switch id="rememberMe">Remember me</note-switch>
 
                     <div class="text-center">
-                      <argon-button @click="loginTest"
+                      <note-button @click.prevent="signIn"
                         class="mt-4"
                         variant="gradient"
                         color="success"
                         fullWidth
                         size="lg"
-                      >Sign in</argon-button>
+                      >Sign in</note-button>
                     </div>
                   </form>
                 </div>
@@ -46,7 +46,7 @@
                   <p class="mx-auto mb-4 text-sm">
                     Don't have an account?
                     <a
-                      href="javascript:;"
+                      href="/signup"
                       class="text-success text-gradient font-weight-bold"
                     >Sign up</a>
                   </p>
@@ -78,26 +78,31 @@
 </template>
 
 <script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
-import ArgonInput from "@/components/ArgonInput.vue";
-import ArgonSwitch from "@/components/ArgonSwitch.vue";
-import ArgonButton from "@/components/ArgonButton.vue";
+// import Navbar from "@/examples/PageLayout/Navbar.vue";
+import NoteInput from "@/components/NoteInput.vue";
+import NoteSwitch from "@/components/NoteSwitch.vue";
+import NoteButton from "@/components/NoteButton.vue";
 const body = document.getElementsByTagName("body")[0];
-import axios from 'axios'
 import  global from '../global';
 export default {
   name: "signin",
+  data(){
+    return{
+      email:"",
+      pwd:""
+    }
+  },
   components: {
-    Navbar,
-    ArgonInput,
-    ArgonSwitch,
-    ArgonButton,
+    // Navbar,
+    NoteInput,
+    NoteSwitch,
+    NoteButton,
   },
   methods:{
-    loginTest(){
-      alert("tesst");
-      axios.post(global.SignURL,{"umail":"qinguoce@126.com","upwd":"123456"}).then(response =>{
-        alert(response.data.result)
+    signIn(){
+      global.ajax.post(global.SignInURL,{"umail":this.email,"upwd":this.pwd}).then(response =>{
+        if(response.data.result === "OK")
+          this.$router.push("/")
       }).catch(err=>{
         console.log("err" + err);
       })

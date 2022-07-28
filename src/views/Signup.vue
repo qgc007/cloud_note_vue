@@ -2,7 +2,7 @@
   <div class="container top-0 position-sticky z-index-sticky">
     <div class="row">
       <div class="col-12">
-        <navbar isBtn="bg-gradient-light" />
+<!--        <navbar isBtn="bg-gradient-light" />-->
       </div>
     </div>
   </div>
@@ -97,10 +97,10 @@
             </div>
             <div class="card-body">
               <form role="form">
-                <argon-input type="text" placeholder="Name" aria-label="Name" />
-                <argon-input type="email" placeholder="Email" aria-label="Email" />
-                <argon-input type="password" placeholder="Password" aria-label="Password" />
-                <argon-checkbox checked>
+                <note-input type="text" placeholder="Name" aria-label="Name" v-model:value="name"/>
+                <note-input type="email" placeholder="Email" aria-label="Email" v-model:value="mail"/>
+                <note-input type="password" placeholder="Password" aria-label="Password" v-model:value="pwd"/>
+                <note-checkbox checked>
                   <label class="form-check-label" for="flexCheckDefault">
                     I agree the
                     <a
@@ -108,14 +108,14 @@
                       class="text-dark font-weight-bolder"
                     >Terms and Conditions</a>
                   </label>
-                </argon-checkbox>
+                </note-checkbox>
                 <div class="text-center">
-                  <argon-button fullWidth color="dark" variant="gradient" class="my-4 mb-2">Sign up</argon-button>
+                  <note-button fullWidth color="dark" variant="gradient" class="my-4 mb-2" @click.prevent="signUp">Sign up</note-button>
                 </div>
                 <p class="text-sm mt-3 mb-0">
                   Already have an account?
                   <a
-                    href="javascript:;"
+                    href="/signin"
                     class="text-dark font-weight-bolder"
                   >Sign in</a>
                 </p>
@@ -130,21 +130,41 @@
 </template>
 
 <script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
+// import Navbar from "@/examples/PageLayout/Navbar.vue";
 import AppFooter from "@/examples/PageLayout/Footer.vue";
-import ArgonInput from "@/components/ArgonInput.vue";
-import ArgonCheckbox from "@/components/ArgonCheckbox.vue";
-import ArgonButton from "@/components/ArgonButton.vue";
+import NoteInput from "@/components/NoteInput.vue";
+import NoteCheckbox from "@/components/NoteCheckbox.vue";
+import NoteButton from "@/components/NoteButton.vue";
+import  global from '../global';
 const body = document.getElementsByTagName("body")[0];
 
 export default {
-  name: "signin",
+  name: "signup",
+  data(){
+    return{
+      mail:"",
+      pwd:"",
+      name:"",
+    }
+  },
   components: {
-    Navbar,
+    // Navbar,
     AppFooter,
-    ArgonInput,
-    ArgonCheckbox,
-    ArgonButton,
+    NoteInput,
+    NoteCheckbox,
+    NoteButton,
+  },
+  methods:{
+    signUp(){
+      global.ajax.post(global.SignUpURL, {
+        "umail": this.mail,
+        "uname":this.name,
+        "upwd": this.pwd,
+      }).then(res=>{
+        if(res.data.result === "OK")
+        this.$router.replace("/signin");
+      })
+    }
   },
   created() {
     this.$store.state.hideConfigButton = true;

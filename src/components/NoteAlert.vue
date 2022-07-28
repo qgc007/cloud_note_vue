@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "argon-alert",
+  name: "note-alert",
   props: {
     color: {
       type: String,

@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "argon-snackbar",
+  name: "note-snackbar",
   props: {
     title: String,
     date: String,

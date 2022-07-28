@@ -25,7 +25,7 @@
             class="w-20 d-flex align-items-end justify-content-end"
             :class="this.$store.state.isRTL ? 'me-auto' : 'ms-auto'"
           >
-            <argon-avatar class="w-60 mt-2" :img="img1" alt="logo" />
+            <note-avatar class="w-60 mt-2" :img="img1" alt="logo" />
           </div>
         </div>
       </div>
@@ -34,14 +34,14 @@
 </template>
 
 <script>
-import ArgonAvatar from "@/components/ArgonAvatar.vue";
+import NoteAvatar from "@/components/NoteAvatar.vue";
 import img from "../../assets/img/card-visa.jpg";
 import img1 from "../../assets/img/logos/mastercard.png";
 
 export default {
   name: "master-card",
   components: {
-    ArgonAvatar,
+    NoteAvatar,
   },
   props: {
     cardHolderText: {

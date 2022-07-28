@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "argon-button",
+  name: "note-button",
   props: {
     color: {
       type: String,
