@@ -12,6 +12,10 @@
   </div>
   <main class="mt-0 main-content">
     <section>
+
+      <note-alert :color="msgStatus" icon="ni ni-check-bold" dismissible :message="message" v-if="showMsg">
+        <strong>Dark!</strong> This is a dismissible alert!
+      </note-alert>
       <div class="page-header min-vh-100">
         <div class="container">
           <div class="row">
@@ -22,25 +26,26 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form role="form" class="was-validated" id="login-form">
                     <div class="mb-3">
-                      <note-input type="email" placeholder="Email" name="email" size="lg" v-model:value="email"/>
+                      <note-input type="email" placeholder="Email" name="email" size="lg" v-model:value="email" id="email" isRequired
+                                  data-bs-toggle="tooltip" title="请输入您已注册邮箱"/>
                     </div>
                     <div class="mb-3">
-                      <note-input type="password" placeholder="Password" name="password" size="lg"  v-model:value="pwd"/>
+                      <note-input type="password" placeholder="Password" name="password" size="lg"  v-model:value="pwd" isRequired
+                                  minlength="6" maxlength="20" data-bs-toggle="tooltip" title="请输入密码6-15位"/>
                     </div>
                     <note-switch id="rememberMe">Remember me</note-switch>
-
-                    <div class="text-center">
-                      <note-button @click.prevent="signIn"
-                        class="mt-4"
-                        variant="gradient"
-                        color="success"
-                        fullWidth
-                        size="lg"
-                      >Sign in</note-button>
-                    </div>
                   </form>
+                  <div class="text-center">
+                    <note-button @click="signIn"
+                                 class="mt-4"
+                                 variant="gradient"
+                                 color="success"
+                                 fullWidth
+                                 size="lg"
+                    >Sign in</note-button>
+                  </div>
                 </div>
                 <div class="px-1 pt-0 text-center card-footer px-lg-2">
                   <p class="mx-auto mb-4 text-sm">
@@ -84,12 +89,16 @@ import NoteSwitch from "@/components/NoteSwitch.vue";
 import NoteButton from "@/components/NoteButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import  global from '../global';
+import NoteAlert from "@/components/NoteAlert.vue";
 export default {
   name: "signin",
   data(){
     return{
       email:"",
-      pwd:""
+      pwd:"",
+      message:"登录成功",
+      showMsg:false,
+      msgStatus:"success"
     }
   },
   components: {
@@ -97,13 +106,28 @@ export default {
     NoteInput,
     NoteSwitch,
     NoteButton,
+    NoteAlert
   },
   methods:{
     signIn(){
+      let form= document.querySelectorAll("#login-form")[0];
+      if(form.checkValidity() === false){
+        return;
+      }
       global.ajax.post(global.SignInURL,{"umail":this.email,"upwd":this.pwd}).then(response =>{
-        if(response.data.result === "OK")
-          this.$router.push("/")
+        this.showMsg=true;
+        if(response.data.result === "OK") {
+          this.message="info:    登录成功";
+          this.msgStatus="success";
+          setTimeout( ()=>this.$router.push("/dashboard-default"),500)
+        }
+        else{
+          this.message="warning:   密码或者用户名错误！";
+          this.msgStatus="warning";
+        }
       }).catch(err=>{
+        this.message="fatal:   服务器错误！";
+        this.msgStatus="danger";
         console.log("err" + err);
       })
     }

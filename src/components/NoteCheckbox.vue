@@ -1,6 +1,6 @@
 <template>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" :name="name" :id="id" :checked="checked" />
+    <input class="form-check-input" type="checkbox" :name="name" :id="id" :checked="checked" @change="onchange"/>
     <label :for="id" class="custom-control-label">
       <slot />
     </label>
@@ -15,5 +15,10 @@ export default {
     id: String,
     checked: String,
   },
+  methods:{
+    onchange(e){
+      this.$emit('update:checked', e.target.checked);
+    }
+  }
 };
 </script>

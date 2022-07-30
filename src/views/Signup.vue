@@ -100,7 +100,7 @@
                 <note-input type="text" placeholder="Name" aria-label="Name" v-model:value="name"/>
                 <note-input type="email" placeholder="Email" aria-label="Email" v-model:value="mail"/>
                 <note-input type="password" placeholder="Password" aria-label="Password" v-model:value="pwd"/>
-                <note-checkbox checked>
+                <note-checkbox v-model:checked="chk">
                   <label class="form-check-label" for="flexCheckDefault">
                     I agree the
                     <a
@@ -145,6 +145,7 @@ export default {
       mail:"",
       pwd:"",
       name:"",
+      chk:false,
     }
   },
   components: {
@@ -156,6 +157,11 @@ export default {
   },
   methods:{
     signUp(){
+      alert(this.chk);
+      if(!this.chk){
+        alert("-----------test-------------")
+        return;
+      }
       global.ajax.post(global.SignUpURL, {
         "umail": this.mail,
         "uname":this.name,

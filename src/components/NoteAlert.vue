@@ -2,14 +2,12 @@
   <div
     class="alert text-white font-weight-bold"
     role="alert"
-    :class="getClasses(color, dismissible)"
-  >
+    :class="getClasses(color, dismissible)" style="position: fixed;width: 100%;opacity: 0.8" v-show="show_msg">
     <span class="alert-icon">
       <i :class="getIcon(icon)" />
     </span>
     <span class="alert-text">
-      &nbsp;
-      <slot />
+      {{ message }}
     </span>
     <button
       v-if="dismissible"
@@ -25,6 +23,11 @@
 
 <script>
 export default {
+  data(){
+    return{
+      show_msg:true
+    }
+  },
   name: "note-alert",
   props: {
     color: {
@@ -36,6 +39,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    message:{
+      type: String,
+      default: ""
+    }
   },
   methods: {
     getClasses: (color, dismissible) => {
@@ -49,5 +56,27 @@ export default {
     },
     getIcon: (icon) => (icon ? icon : null),
   },
+  mounted() {
+    setTimeout(()=>{
+      this.show_msg=false;
+    },10000)
+  }
 };
 </script>
+<style>
+/*.alert{*/
+/*  position: fixed;*/
+/*  opacity: 0.9;*/
+/*  width: 100%;*/
+/*}*/
+</style>
+
+<!--<style>-->
+<!--.fadenum{-->
+<!--  animation:fade 2s 1;-->
+<!--}-->
+<!--@keyframes fade{-->
+<!--  0%{opacity: 0;}-->
+<!--  100%{opacity: 0.9;}-->
+<!--}-->
+<!--</style>-->
